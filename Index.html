@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Price List 2026 - Order</title>
+<style>
+:root{
+  --bg:#fff; --fg:#1b1b1b; --mut:#777; --line:#e6e6e6; 
+  --acc:#ea580c; --acc-gradient:linear-gradient(135deg, #f97316 0%, #dc2626 100%);
+  --card:#fdfbf7; --onacc:#fff;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121212; --fg:#f0f0f0; --mut:#9a9a9a; --line:#2c2c2c; 
+    --acc:#fb923c; --acc-gradient:linear-gradient(135deg, #f97316 0%, #b91c1c 100%);
+    --card:#1a1a1a; --onacc:#111;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121212; --fg:#f0f0f0; --mut:#9a9a9a; --line:#2c2c2c; 
+  --acc:#fb923c; --acc-gradient:linear-gradient(135deg, #f97316 0%, #b91c1c 100%);
+  --card:#1a1a1a; --onacc:#111;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.4 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+main{max-width:720px;margin:0 auto;padding:0 16px 110px}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:14px 0 10px;z-index:5;border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:22px;display:flex;align-items:center;justify-content:space-between}
+h1 span.title-text{display:flex;align-items:center;gap:6px}
+h1 span.title-text span{color:var(--acc)}
+.festive-badge{font-size:11px;background:var(--acc-gradient);color:#fff;padding:3px 8px;border-radius:20px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase}
+.hi{color:var(--mut);font-size:13px;margin:2px 0 10px;display:flex;justify-content:space-between;align-items:center}
+.change-name{background:none;border:none;color:var(--acc);font-size:12px;cursor:pointer;padding:0;text-decoration:underline}
+input{width:100%;font:inherit;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg)}
+input:focus{outline:2px solid var(--acc)}
+h2{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--acc);margin:22px 0 4px;display:flex;align-items:center;gap:6px}
+h2 em{font-style:normal;color:var(--mut);text-transform:none;letter-spacing:0;margin-left:6px}
+.row{display:flex;align-items:center;gap:10px;padding:11px 12px;border-bottom:1px solid var(--line);background:var(--card);margin-bottom:6px;border-radius:10px;transition:border-color 0.2s}
+.row:hover{border-color:var(--acc)}
+.nm{flex:1;min-width:0}
+.nm b{font-weight:500;display:flex;align-items:center;gap:6px}
+.item-code{font-size:11px;background:var(--line);color:var(--mut);padding:1px 5px;border-radius:4px;font-family:monospace}
+.nm small,small{color:var(--mut);font-size:12px}
+.pr{font-weight:700;min-width:65px;text-align:right;color:var(--acc)}
+.ctl{width:104px;display:flex;justify-content:flex-end;align-items:center;gap:8px}
+button{font:inherit;cursor:pointer}
+.add{padding:6px 16px;border:1px solid var(--acc);color:var(--acc);background:none;border-radius:8px;font-weight:600;transition:all 0.2s}
+.add:hover{background:var(--acc);color:var(--onacc)}
+.ctl button:not(.add){width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center}
+.ctl button:not(.add):hover{border-color:var(--acc);color:var(--acc)}
+.ctl span{min-width:20px;text-align:center;font-weight:600}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line);z-index:6}
+.bar button,.send{display:flex;width:100%;max-width:720px;margin:0 auto;justify-content:space-between;align-items:center;padding:13px 16px;border:0;border-radius:12px;background:var(--acc-gradient);color:var(--onacc);font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(234,88,12,0.3)}
+.bar button:disabled{opacity:.45;box-shadow:none}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(3px);z-index:9;display:none;align-items:flex-end;justify-content:center}
+.ov.on{display:flex}
+.sheet{background:var(--bg);width:100%;max-width:720px;max-height:88%;overflow:auto;border-radius:18px 18px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 30px rgba(0,0,0,0.15)}
+.gate{align-items:center;padding:20px}
+.gate .sheet{border-radius:18px;max-width:380px}
+.sheet h3{margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.sheet .send{margin-top:14px}
+.sec{display:flex;gap:8px;margin-top:10px}
+.sec button{flex:1;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font-weight:500}
+.sec button:hover{border-color:var(--acc);color:var(--acc)}
+.tot-box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin:12px 0}
+.tot-row{display:flex;justify-content:space-between;font-size:14px;color:var(--mut);margin-bottom:6px}
+.tot{display:flex;justify-content:space-between;font-weight:700;font-size:18px;padding-top:8px;border-top:1px dashed var(--line);color:var(--acc)}
+.promo-box{display:flex;gap:8px;margin:12px 0}
+.promo-box input{flex:1;padding:8px 12px;font-size:14px;text-transform:uppercase}
+.promo-box button{padding:8px 16px;background:var(--fg);color:var(--bg);border:none;border-radius:10px;font-weight:600;cursor:pointer}
+.promo-msg{font-size:12px;margin-top:-6px;margin-bottom:8px;font-weight:500}
+.promo-msg.success{color:#16a34a}
+.promo-msg.error{color:#dc2626}
+html{-webkit-text-size-adjust:100%}
+input{font-size:16px;-webkit-appearance:none;appearance:none}
+.nm b{overflow-wrap:anywhere}
+.ov{height:100vh;height:100dvh}.sheet{max-height:92vh;max-height:92dvh}
+@media (max-width:520px){
+main{padding:0 12px 120px}
+.row{flex-wrap:wrap;row-gap:6px;padding:11px 12px}
+.nm{flex:1 1 100%}
+.pr{flex:1;text-align:left;font-size:16px}
+.ctl{width:auto;gap:10px}
+.ctl button:not(.add){width:40px;height:40px;font-size:22px}
+.add{padding:9px 26px}
+.sec{flex-wrap:wrap}.sec button{flex:1 1 30%;padding:13px 8px}
+.gate{align-items:flex-end;padding:0}.gate .sheet{max-width:none;border-radius:18px 18px 0 0}
+}
+[hidden]{display:none!important}
+</style></head><body>
+<main>
+<header>
+  <h1>
+    <span class="title-text">Price List <span>2026</span></span>
+    <span class="festive-badge">🪔 Diwali Special</span>
+  </h1>
+  <div class="hi" id="hi">
+    <span>Crackers &amp; Fireworks</span>
+    <button class="change-name" id="changeNameBtn" style="display:none;" onclick="resetUser()">Change Name</button>
+  </div>
+  <input id="q" type="search" placeholder="🔍 Search crackers by name or category..." autocomplete="off">
+</header>
+<div id="list"></div>
+<p><small>Prices in ₹ per unit shown (Box / Pkt / Bag / Tube). Items marked "No discount" have fixed rates.</small></p>
+</main>
+<div class="bar"><button id="cartBtn" disabled><span id="cn">Cart is empty</span><span id="ct"></span></button></div>
+
+<div class="ov gate on" id="gate">
+  <div class="sheet">
+    <h3>🪔 Welcome to Diwali Bazaar</h3>
+    <p style="margin:0 0 12px;color:var(--mut)">Please enter your name to start adding items to your cart.</p>
+    <input id="nm" placeholder="Your name" autocomplete="name" maxlength="60">
+    <button class="send" id="go" style="margin-top:12px;justify-content:center">Start Shopping &rarr;</button>
+  </div>
+</div>
+
+<div class="ov" id="cart">
+  <div class="sheet">
+    <h3>🛒 Your Cart</h3>
+    <div id="cl"></div>
+    
+    <div class="promo-box">
+      <input id="promoCodeInput" placeholder="Promo Code (e.g. DIWALI10)">
+      <button onclick="applyPromo()">Apply</button>
+    </div>
+    <div id="promoMsg" class="promo-msg" hidden></div>
+
+    <div class="tot-box">
+      <div class="tot-row"><span>Subtotal</span><span id="subTotalText">₹0</span></div>
+      <div id="discountRow" class="tot-row" hidden style="color: #16a34a;"><span>Discount (<span id="appliedCodeLabel"></span>)</span><span id="discountText">-₹0</span></div>
+      <div class="tot"><span>Grand Total</span><span id="tt">₹0</span></div>
+    </div>
+
+    <a class="send" id="wa" target="_blank" rel="noopener"><span>Send order on WhatsApp</span><span>&rarr;</span></a>
+    <div class="sec"><button id="cp">Copy order</button><button id="cx">Clear cart</button><button id="cc">Close</button></div>
+    <p><small>Tap "Send order on WhatsApp", then press send in WhatsApp to place your order.</small></p>
+  </div>
+</div>
+<script>
+const D=[{"t":"Sparklers","nd":0,"i":[[1,"7 cm Electric Sparklers","10 Pcs",34,"Per Box"],[2,"7 cm Colour Sparklers","10 Pcs",51,"Per Box"],[3,"10 cm Electric Sparklers","10 Pcs",78,"Per Box"],[4,"10 cm Colour Sparklers","10 Pcs",91,"Per Box"],[5,"12 cm Electric Sparklers","10 Pcs",107,"Per Box"],[6,"12 cm Colour Sparklers","10 Pcs",120,"Per Box"],[7,"15 cm Electric Sparklers","10 Pcs",176,"Per Box"],[8,"15 cm Colour Sparklers","10 Pcs",221,"Per Box"],[9,"30 cm Electric Sparklers","5 Pcs",176,"Per Box"],[10,"30 cm Colour Sparklers","5 Pcs",221,"Per Box"],[11,"50 cm Electric Sparklers","5 Pcs",494,"Per Box"],[12,"50 cm Colour Sparklers","5 Pcs",601,"Per Box"],[13,"60 cm Colour Sparklers","5 Pcs",640,"Per Tube"],[14,"75 cm Electric Sparklers","5 Pcs",800,"Per Tube"],[15,"Golden Umbrella","1 Pce",432,"Per Tube"]]},{"t":"Chakkars","nd":0,"i":[[16,"Peppy Spin","10 Pcs",107,"Per Box"],[17,"Ground Chakkar Big","25 Pcs",257,"Per Box"],[18,"Ground Chakkar Asoka","10 Pcs",161,"Per Box"],[19,"Ground Chakkar Spinner Special","10 Pcs",211,"Per Box"],[20,"Ground Chakkar Spinner Deluxe","10 Pcs",445,"Per Box"],[21,"Ground Chakkar Mega Deluxe","10 Pcs",527,"Per Box"],[22,"Jolly Wheel","10 Pcs",229,"Per Box"],[23,"Jil Jil Fancy Wheel","5 Pcs",255,"Per Box"]]},{"t":"Twinkling Star","nd":0,"i":[[24,"Twinkling Star 1½ Feet","10 Pcs",98,"Per Box"],[25,"Twinkling Star 4 Feet","10 Pcs",254,"Per Box"]]},{"t":"Pencils","nd":0,"i":[[26,"Silver Rain Torch","10 Pcs",247,"Per Box"],[27,"50 Seconds Laser Show","5 Pcs",348,"Per Box"],[28,"100 Seconds Torch / Tricolor","5 Pcs",710,"Per Box"],[29,"Olympic Torch","5 Pcs",640,"Per Box"],[30,"Max-100","2 Pcs",640,"Per Box"]]},{"t":"Flower Pots","nd":0,"i":[[31,"Flower Pots Small","10 Pcs",169,"Per Box"],[32,"Flower Pots Big","10 Pcs",312,"Per Box"],[33,"Flower Pots Special","10 Pcs",416,"Per Box"],[34,"Flower Pots Deluxe","10 Pcs",611,"Per Box"],[35,"Crackling Pots (5 Pcs)","5 Pcs",897,"Per Box"]]},{"t":"Mega Pots","nd":0,"i":[[36,"Colour Koti Deluxe","10 Pcs",832,"Per Box"],[37,"Mega Pinchore Pots","10 Pcs",962,"Per Box"],[38,"Mega Silver Pots","10 Pcs",962,"Per Box"],[39,"Mega Tricolour Pots","10 Pcs",1391,"Per Box"],[40,"Mega 50 50 Pots","10 Pcs",1391,"Per Box"],[41,"Mega Colour Changing Pots","10 Pcs",1531,"Per Box"]]},{"t":"Fountain","nd":0,"i":[[42,"Sizzler Red & Green","1 Pce",185,"Per Box"],[43,"Dragon Showers","1 Pce",185,"Per Box"],[44,"Sun Drops","3 Pcs",250,"Per Box"],[45,"Moon Drops","3 Pcs",250,"Per Box"],[46,"Tiny Pots","3 Pcs",278,"Per Box"],[47,"Ice Fountain","3 Pcs",278,"Per Box"],[48,"Talking Tom","1 Pce",506,"Per Box"],[49,"Pop Corn","1 Pce",506,"Per Box"]]},{"t":"Fancy Fountain","nd":0,"i":[[50,"Shan Silver / Minmini","1 Pce",211,"Per Box"],[51,"3 Pcs Pack","3 Pcs",632,"Per Pack"]]},{"t":"Premium Collections","nd":0,"i":[[52,"Laser Peacock","1 Pce",432,"Per Box"],[53,"Bada Peacock (New)","1 Pce",1040,"Per Box"]]},{"t":"Rockets","nd":0,"i":[[54,"Rocket Bomb","10 Pcs",198,"Per Box"],[55,"Lunik Express","10 Pcs",460,"Per Box"],[56,"Double Sound Rocket","10 Pcs",460,"Per Box"],[57,"Japanese 3 Sound Rocket","6 Pcs",766,"Per Box"],[58,"Sri Hanuman Gadha Rocket","6 Pcs",954,"Per Box"]]},{"t":"Whistling Series","nd":0,"i":[[59,"Police Siren","3 Pcs",754,"Per Box"]]},{"t":"Atom Bombs","nd":0,"i":[[60,"Atom Bomb Green","10 Pcs",146,"Per Box"],[61,"Hydrogen Bomb Green","10 Pcs",198,"Per Box"],[62,"Hondo Bomb Green","10 Pcs",382,"Per Box"],[63,"Bullet Bomb","10 Pcs",101,"Per Box"],[64,"Bullet Bomb Giant","10 Pcs",140,"Per Box"],[65,"999 Dolak Bomb","10 Pcs",400,"Per Box"],[66,"Laila Majnu","5 Pcs",224,"Per Box"]]},{"t":"Children Novelties","nd":0,"i":[[67,"Assorted Cartoon (10 Pcs)","10 Pcs",83,"Per Box"],[68,"Assorted Cartoon (25 Pcs)","25 Pcs",182,"Per Box"],[69,"Snake Cartoon Big (25 Pcs)","25 Pcs",257,"Per Box"],[70,"Electric Stone","10 Pcs",91,"Per Box"],[71,"Valcano","10 Pcs",120,"Per Box"],[72,"Photo Flash","5 Pcs",182,"Per Box"],[73,"Tug of War","10 Pcs",273,"Per Box"],[74,"Traffic Signal","5 Pcs",190,"Per Box"],[75,"3D Pots Gold","3 Pcs",140,"Per Box"],[76,"3D Pots Silver","3 Pcs",140,"Per Box"],[77,"Butterfly","5 Pcs",221,"Per Box"],[78,"Gee Boom Baa","50 Pcs",338,"Per Box"],[79,"Hi Spin","5 Pcs",221,"Per Box"],[80,"Drone","5 Pcs",333,"Per Box"],[81,"Helicopter","5 Pcs",333,"Per Box"]]},{"t":"Tiny Aerial Novelties","nd":0,"i":[[82,"Fantasy Sky / Colour Plus","5 Pcs",460,"Per Box"],[83,"Top 10 Colour Out","10 Pcs",974,"Per Box"]]},{"t":"Colour Smoke Series","nd":0,"i":[[84,"Colour Smoke Yellow","2 Pcs",458,"Per Box"],[85,"Colour Smoke Green","2 Pcs",458,"Per Box"],[86,"Rainbow (3 in 1)","3 Pcs",689,"Per Box"]]},{"t":"Pick 3 Series (Window)","nd":0,"i":[[87,"Pick 3","3 Pcs",473,"Per Box"],[88,"3 G","3 Pcs",473,"Per Box"],[89,"Little Prince","3 Pcs",473,"Per Box"],[90,"Bird of Pray","3 Pcs",473,"Per Box"]]},{"t":"1\" Colour Comets","nd":0,"i":[[91,"Pogo Gold","1 Pce",211,"Per Box"],[92,"Pogo Silver","1 Pce",211,"Per Box"],[93,"Pogo Red Green & Gold","1 Pce",211,"Per Box"]]},{"t":"Flower Series (Window)","nd":0,"i":[[94,"Sun Flower","3 Pcs",647,"Per Box"],[95,"Jasmine Flower","3 Pcs",647,"Per Box"],[96,"Krazy Flower","3 Pcs",647,"Per Box"]]},{"t":"2\" Inox Series","nd":0,"i":[[97,"I Nox","1 Pce",312,"Per Box"],[98,"London Dreams","1 Pce",312,"Per Box"],[99,"Sentosa","1 Pce",312,"Per Box"],[100,"Golden Rain","1 Pce",312,"Per Box"]]},{"t":"2\" Colour Comets","nd":0,"i":[[101,"Golden Ceremony","3 Pcs",1001,"Per Box"],[102,"Googly","3 Pcs",1001,"Per Box"],[103,"Indra Jaal","3 Pcs",1001,"Per Box"],[104,"Mas","3 Pcs",1001,"Per Box"],[105,"Crackling Delight (Crackling)","3 Pcs",1001,"Per Box"],[106,"Hulk War (Crackling)","3 Pcs",1001,"Per Box"],[107,"Hercules","3 Pcs",1001,"Per Box"],[108,"Cinderella","3 Pcs",1001,"Per Box"],[109,"Aladdin","3 Pcs",1001,"Per Box"],[110,"Indiana Jones","3 Pcs",1001,"Per Box"]]},{"t":"2\" E Bay Series (Window)","nd":0,"i":[[111,"E Bay","3 Pcs",1001,"Per Box"],[112,"Princess of Heaven","3 Pcs",1001,"Per Box"],[113,"Beauty & Beast","3 Pcs",1001,"Per Box"]]},{"t":"3½\" Deluxe Comets (Window)","nd":0,"i":[[114,"Golden Lights","1 Pce",835,"Per Box"],[115,"1000 Lights","1 Pce",1017,"Per Box"],[116,"Sun & Moon","1 Pce",1531,"Per Box"]]},{"t":"3\" Dual Series","nd":0,"i":[[117,"Sun World","2 Pcs",1755,"Per Box"],[118,"Star World","2 Pcs",1755,"Per Box"],[119,"Sky World","2 Pcs",1755,"Per Box"],[120,"Snow World","2 Pcs",1755,"Per Box"],[121,"Sea World","2 Pcs",1755,"Per Box"],[122,"5th Sense","2 Pcs",1755,"Per Box"],[123,"6th Sense","2 Pcs",1755,"Per Box"],[124,"7th Sense","2 Pcs",1755,"Per Box"]]},{"t":"Master Of Mix Series","nd":0,"i":[[125,"Crazy Kicks","1 Pce",723,"Per Box"],[126,"Coaster Crazy","1 Pce",723,"Per Box"],[127,"Marry Poppins","1 Pce",723,"Per Box"],[128,"MJ Bubbles","1 Pce",723,"Per Box"],[129,"Jurassic Park","1 Pce",723,"Per Box"],[130,"World War III","1 Pce",723,"Per Box"]]},{"t":"3½\" Colour Comets (Window)","nd":0,"i":[[131,"Hanging Garden","1 Pce",1139,"Per Box"],[132,"Rainy Night","1 Pce",1139,"Per Box"],[133,"Tower of Malasiya","1 Pce",1139,"Per Box"],[134,"Pop Princess","1 Pce",1139,"Per Box"],[135,"Double Helix","1 Pce",1139,"Per Box"],[136,"Effil Tower","1 Pce",1139,"Per Box"],[137,"Crackling Diamond","1 Pce",1139,"Per Box"]]},{"t":"3½\" Co Co Series (Window)","nd":0,"i":[[138,"Crackling Co Co","2 Pcs",2085,"Per Box"],[139,"Silver Co Co","2 Pcs",2085,"Per Box"],[140,"Ping Pong","2 Pcs",2085,"Per Box"],[141,"Dia Dem","2 Pcs",2085,"Per Box"],[142,"7 Up Crackling","2 Pcs",2085,"Per Box"],[143,"Dazzle World","2 Pcs",2085,"Per Box"]]},{"t":"4\" Dual Series","nd":0,"i":[[144,"Big Boss Dual Series","2 Pcs",2309,"Per Box"]]},{"t":"Cakes (10 Shot Square)","nd":0,"i":[[145,"Wings (12 Shots)","1 Pce",473,"Per Box"],[146,"White Field (10 Shots)","1 Pce",473,"Per Box"],[147,"Clusters (10 Shots)","1 Pce",473,"Per Box"],[148,"Solaris (10 Shots)","1 Pce",473,"Per Box"]]},{"t":"10 Shots Lamba","nd":0,"i":[[149,"Crackling Nest","1 Pce",473,"Per Box"],[150,"Meteor","1 Pce",473,"Per Box"],[151,"Helious","1 Pce",473,"Per Box"]]},{"t":"Cakes (12 Shots Hexogen)","nd":0,"i":[[152,"Beauty World","1 Pce",627,"Per Box"],[153,"Angry Birds","1 Pce",627,"Per Box"],[154,"Power Raider","1 Pce",627,"Per Box"],[155,"Alien Attack","1 Pce",627,"Per Box"]]},{"t":"Cakes (20 Shots Lamba)","nd":0,"i":[[156,"Indian Delight","1 Pce",1323,"Per Box"],[157,"French Feast","1 Pce",1323,"Per Box"],[158,"Mission Rado","1 Pce",1323,"Per Box"],[159,"City of Champ","1 Pce",1323,"Per Box"]]},{"t":"Budget Aerials","nd":0,"i":[[160,"25 Shot Dlx","1 Pce",1253,"Per Box"],[161,"30 Shots","1 Pce",1643,"Per Box"],[162,"Wedding 50 (50 Shots)","1 Pce",2824,"Per Box"],[163,"60 Shots","1 Pce",3289,"Per Box"]]},{"t":"Mega Repeaters","nd":0,"i":[[164,"Fire Fox / Happy Boom (5X10)","1 Pce",4869,"Per Box"],[165,"Sri Krishna Leela (100 Shots)","1 Pce",5842,"Per Box"],[166,"Universal Kingdom (120 Shots)","1 Pce",6399,"Per Box"],[167,"Krishna Jaal (240 Shots)","1 Pce",12797,"Per Box"]]},{"t":"Whistling Repeaters","nd":0,"i":[[168,"Singing Dolls (10 Whistle)","1 Pce",528,"Per Box"],[169,"Jingles (30 Whistle)","1 Pce",1643,"Per Box"]]},{"t":"Flash Light Sound","nd":0,"i":[[170,"5\" Panda","5 Pcs",98,"Per Pkt"],[171,"4\" Bheem","5 Pcs",75,"Per Pkt"],[172,"3½\" Bheem","5 Pcs",52,"Per Pkt"],[173,"2¾\" Kuruvi","5 Pcs",29,"Per Pkt"],[174,"Krishna 2 Sound","5 Pcs",94,"Per Pkt"]]},{"t":"Bijili (Gold)","nd":0,"i":[[175,"Red Bijili in Bags (50 Pcs)","",52,"Per Bag"],[176,"Stripped Bijili in Bags (50 Pcs)","",55,"Per Bag"],[177,"Red Bijili in Bags (100 Pcs)","",104,"Per Bag"],[178,"Stripped Bijili in Bags (100 Pcs)","",111,"Per Bag"]]},{"t":"New Arrivals","nd":0,"i":[[179,"Rangoli (15 Shots Smoke)","1 Pce",1489,"Per Box"]]},{"t":"Budget Gift Boxes","nd":1,"i":[[180,"Marvel Gift Box (20 Items)","",588,"Per Box"],[181,"Festive Kart Gift Box (25 Items)","",725,"Per Box"],[182,"Pyro Kart Gift Box (30 Items)","",935,"Per Box"]]},{"t":"Fancy Gift Box","nd":1,"i":[[183,"HD Celebration (35 Items)","",1061,"Per Box"],[184,"Minions Gift Box (40 Items)","",1292,"Per Box"],[185,"Elite Gift Box (50 Items)","",1775,"Per Box"]]},{"t":"Mega Gift Boxes","nd":1,"i":[[186,"Oscar (61 Items)","",2809,"Per Box"],[187,"Fantasy Bag","",null,"Per Box"]]},{"t":"Serpent Eggs","nd":1,"i":[[188,"Snake Tablet Big (Dozen)","",200,"Per Box"]]}],PH="919940316304";
+
+let I = {};
+D.forEach(c => c.i.forEach(x => I[x[0]] = x));
+
+let who = localStorage.getItem("cracker_user") || "";
+let Q = JSON.parse(localStorage.getItem("cracker_cart") || "{}");
+let appliedPromo = null;
+let discountAmount = 0;
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[m]));
+const ctl = s => Q[s] ? <button data-a="-">&minus;</button><span>${Q[s]}</span><button data-a="+">+</button> : <button class="add" data-a="+">Add</button>;
+
+$("#list").innerHTML = D.map(c => <section><h2><span>🪔</span> ${esc(c.t)}${c.nd ? "<em>No discount</em>" : ""}</h2> + 
+  c.i.map(x => `
+    <div class="row" data-sl="${x[0]}">
+      <div class="nm">
+        <b><span class="item-code">#${x[0]}</span> ${esc(x[1])}</b>
+        <small>${x[2] ? esc(x[2]) + " &middot; " : ""}${esc(x[4])}</small>
+      </div>
+      <div class="pr">${x[3] != null ? "₹" + x[3] : "—"}</div>
+      <div class="ctl">${x[3] != null ? ctl(x[0]) : "<small>On request</small>"}</div>
+    </div>
